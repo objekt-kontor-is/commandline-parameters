@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>commandline-parameters</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+
+	<name>Commandline parameters</name>
+	<description>Provides tools for definition, parsing and validation of command line parameters</description>
+	<url>https://github.com/objekt-kontor-is/doby</url>
+
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<organization>
+		<name>Objekt-Kontor IS GmbH &amp; Co KG</name>
+		<url>http://www.objekt-kontor.de</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<name>Eugen Borth</name>
+			<email>eugen.borth@objekt-kontor.de</email>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git@github.com:objekt-kontor-is/commandline-parameters.git</connection>
+		<developerConnection>scm:git:git@github.com:objekt-kontor-is/commandline-parameters.git</developerConnection>
+		<url>git@github.com:objekt-kontor-is/commandline-parameters.git</url>
+	</scm>
+
+	<parent>
+		<groupId>de.objekt-kontor</groupId>
+		<artifactId>master-pom</artifactId>
+		<version>4</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>commons-cli</groupId>
+			<artifactId>commons-cli</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+	</dependencies>
+</project>
