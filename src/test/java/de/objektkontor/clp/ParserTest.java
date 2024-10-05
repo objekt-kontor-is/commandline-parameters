@@ -1,12 +1,13 @@
 package de.objektkontor.clp;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.SimpleDateFormat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import de.objektkontor.clp.testvalues.TestArray;
 import de.objektkontor.clp.testvalues.TestBoolean;
@@ -26,16 +27,20 @@ import de.objektkontor.clp.testvalues.TestValues;
 
 public class ParserTest {
 
-	@Test(expected = InvalidParameterException.class)
+	@Test
 	public void testUnknownParameter() throws Exception {
-		Parser<TestBoolean> parser = new Parser<>("test", TestBoolean.class);
-		parser.parse(new TestBoolean(), "-x", "-b", "-B");
+		assertThrows(InvalidParameterException.class, () -> {
+			Parser<TestBoolean> parser = new Parser<>("test", TestBoolean.class);
+			parser.parse(new TestBoolean(), "-x", "-b", "-B");
+		});
 	}
 
-	@Test(expected = InvalidParameterException.class)
+	@Test
 	public void testMissingRequiredParameter() throws Exception {
-		Parser<TestBoolean> parser = new Parser<>("test", TestBoolean.class);
-		parser.parse(new TestBoolean(), "-b");
+		assertThrows(InvalidParameterException.class, () -> {
+			Parser<TestBoolean> parser = new Parser<>("test", TestBoolean.class);
+			parser.parse(new TestBoolean(), "-b");
+		});
 	}
 
 	@Test
@@ -66,7 +71,7 @@ public class ParserTest {
 	public void testParseByteValues() throws Exception {
 		Parser<TestByte> parser = new Parser<>("test", TestByte.class);
 		TestByte testParameters = parser.parse(new TestByte(), "-b", "10", "-B", "11");
-		assertEquals(new Byte((byte) 10), testParameters.getValue());
+		assertEquals(Byte.valueOf((byte) 10), testParameters.getValue());
 		assertEquals(11, testParameters.getRequiredValue());
 	}
 
@@ -74,7 +79,7 @@ public class ParserTest {
 	public void testParseShortValues() throws Exception {
 		Parser<TestShort> parser = new Parser<>("test", TestShort.class);
 		TestShort testParameters = parser.parse(new TestShort(), "-s", "10", "-S", "11");
-		assertEquals(new Short((short) 10), testParameters.getValue());
+		assertEquals(Short.valueOf((short) 10), testParameters.getValue());
 		assertEquals(11, testParameters.getRequiredValue());
 	}
 
@@ -82,7 +87,7 @@ public class ParserTest {
 	public void testParseCharacterValues() throws Exception {
 		Parser<TestCharacter> parser = new Parser<>("test", TestCharacter.class);
 		TestCharacter testParameters = parser.parse(new TestCharacter(), "-c", "A", "-C", "B");
-		assertEquals(new Character('A'), testParameters.getValue());
+		assertEquals(Character.valueOf('A'), testParameters.getValue());
 		assertEquals('B', testParameters.getRequiredValue());
 	}
 
@@ -90,7 +95,7 @@ public class ParserTest {
 	public void testParseIntegerValues() throws Exception {
 		Parser<TestInteger> parser = new Parser<>("test", TestInteger.class);
 		TestInteger testParameters = parser.parse(new TestInteger(), "-i", "10", "-I", "11");
-		assertEquals(new Integer(10), testParameters.getValue());
+		assertEquals(Integer.valueOf(10), testParameters.getValue());
 		assertEquals(11, testParameters.getRequiredValue());
 	}
 
@@ -98,7 +103,7 @@ public class ParserTest {
 	public void testParseLongValues() throws Exception {
 		Parser<TestLong> parser = new Parser<>("test", TestLong.class);
 		TestLong testParameters = parser.parse(new TestLong(), "-l", "10", "-L", "11");
-		assertEquals(new Long(10), testParameters.getValue());
+		assertEquals(Long.valueOf(10), testParameters.getValue());
 		assertEquals(11l, testParameters.getRequiredValue());
 
 	}
@@ -125,22 +130,28 @@ public class ParserTest {
 			testParameters.getRequiredValues());
 	}
 
-	@Test(expected = InvalidParameterException.class)
+	@Test
 	public void testValidateValue() throws Exception {
-		Parser<TestValidators> parser = new Parser<>("test", TestValidators.class);
-		parser.parse(new TestValidators(), "-s", "invalid", "-S", "stringRequiredValue");
+		assertThrows(InvalidParameterException.class, () -> {
+			Parser<TestValidators> parser = new Parser<>("test", TestValidators.class);
+			parser.parse(new TestValidators(), "-s", "invalid", "-S", "stringRequiredValue");
+		});
 	}
 
-	@Test(expected = InvalidParameterException.class)
+	@Test
 	public void testValidateRequiredValue() throws Exception {
-		Parser<TestValidators> parser = new Parser<>("test", TestValidators.class);
-		parser.parse(new TestValidators(), "-s", "stringValue");
+		assertThrows(InvalidParameterException.class, () -> {
+			Parser<TestValidators> parser = new Parser<>("test", TestValidators.class);
+			parser.parse(new TestValidators(), "-s", "stringValue");
+		});
 	}
 
-	@Test(expected = InvalidParameterException.class)
+	@Test
 	public void testValidateClass() throws Exception {
-		Parser<TestValidators> parser = new Parser<>("test", TestValidators.class);
-		parser.parse(new TestValidators(), "-s", "invalid", "-S", "invalid");
+		assertThrows(InvalidParameterException.class, () -> {
+			Parser<TestValidators> parser = new Parser<>("test", TestValidators.class);
+			parser.parse(new TestValidators(), "-s", "invalid", "-S", "invalid");
+		});
 	}
 
 	@Test

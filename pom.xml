@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>commandline-parameters</artifactId>
-	<version>1.0.0</version>
+	<version>2.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>Commandline parameters</name>
@@ -38,14 +38,14 @@
 	<parent>
 		<groupId>de.objekt-kontor</groupId>
 		<artifactId>master-pom</artifactId>
-		<version>4</version>
+		<version>5</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>commons-cli</groupId>
 			<artifactId>commons-cli</artifactId>
-			<version>1.3.1</version>
+			<version>1.7.0</version>
 		</dependency>
 	</dependencies>
 </project>
