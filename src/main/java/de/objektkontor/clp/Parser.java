@@ -148,7 +148,7 @@ public class Parser<V> {
 			Class<? extends ParameterValidator<?>> validatorType = validators[0].value();
 			try {
 				@SuppressWarnings("unchecked")
-				ParameterValidator<V> parameterValidator = (ParameterValidator<V>) validatorType.newInstance();
+				ParameterValidator<V> parameterValidator = (ParameterValidator<V>) validatorType.getDeclaredConstructor().newInstance();
 				this.parameterValidator = parameterValidator;
 			} catch (Exception e) {
 				throw new IllegalStateException("Error initializing validator class: " + validatorType, e);
@@ -201,14 +201,14 @@ public class Parser<V> {
 		Class<? extends ParameterConverter<?>> type = parameter.converter();
 		if (type == CommandLineParameter.DefaultConverter.class)
 			return getDefaultConverter(parameterType);
-		return type.newInstance();
+		return type.getDeclaredConstructor().newInstance();
 	}
 
 	private ParameterValidator<?> buildValidator(CommandLineParameter parameter) throws Exception {
 		Class<? extends ParameterValidator<?>> type = parameter.validator();
 		if (type == CommandLineParameter.DefaultValidator.class)
 			return null;
-		return type.newInstance();
+		return type.getDeclaredConstructor().newInstance();
 	}
 
 	private void applyValues(CommandLine commandLine, V value) throws InvalidParameterException {
